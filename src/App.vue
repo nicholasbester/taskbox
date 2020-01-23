@@ -1,15 +1,20 @@
 <template>
-  <div id="app"></div>
+  <div id="app">
+    <inbox-screen />
+  </div>
 </template>
 
 <script>
-
-export default {
-  name: "app",
-  components: {}
-};
+  import store from './store';
+  import InboxScreen from './components/InboxScreen.vue';
+  export default {
+    name: 'app',
+    store,
+    components: {
+      InboxScreen,
+    },
+  };
 </script>
-
 <style>
-@import './index.css';
+  @import './index.css';
 </style>

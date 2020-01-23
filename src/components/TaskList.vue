@@ -1,43 +1,23 @@
 <template>
   <div>
-    <div class="list-items" v-if="loading">loading</div>
-    <div class="list-items" v-if="noTasks && !this.loading">empty</div>
-    <div class="list-items" v-if="showTasks">
-      <task
-        v-for="(task, index) in tasks"
-        :key="index"
-        :task="task"
-        @archiveTask="$emit('archiveTask', $event)"
-        @pinTask="$emit('pinTask', $event)"
-      />
-    </div>
+    <pure-task-list :tasks="tasks" @archiveTask="archiveTask" @pinTask="pinTask" />
   </div>
 </template>
 
 <script>
-  import Task from './Task';
+  import PureTaskList from './PureTaskList';
+  import { mapState, mapActions } from 'vuex';
+
   export default {
     name: 'task-list',
-    props: {
-      loading: {
-        type: Boolean,
-        default: false,
-      },
-      tasks: {
-        type: Array,
-        default: () => []
-      },
-    },
     components: {
-      Task,
+      PureTaskList,
+    },
+    methods: {
+      ...mapActions(['archiveTask', 'pinTask']),
     },
     computed: {
-      noTasks() {
-        return this.tasks.length === 0;
-      },
-      showTasks() {
-        return !this.loading && !this.noTasks;
-      },
+      ...mapState(['tasks']),
     },
   };
 </script>

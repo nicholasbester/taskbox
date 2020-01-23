@@ -1,4 +1,4 @@
-import TaskList from './TaskList';
+import PureTaskList from './PureTaskList';
 import { taskData, actionsData } from './Task.stories';
 
 const paddedList = () => {
@@ -21,7 +21,8 @@ export const defaultTasksData = [
   { ...taskData, id: "6", title: "Task 6" }
 ];
 export const withPinnedTasksData = [
-  ...defaultTasksData.slice(0, 5),
+  ...defaultTasksData.slice(0, 4),
+  { id: "5", title: "Task 5 (pinned)", state: "TASK_PINNED" },
   { id: "6", title: "Task 6 (pinned)", state: "TASK_PINNED" }
 ];
 
