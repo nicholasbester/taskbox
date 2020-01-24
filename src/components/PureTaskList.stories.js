@@ -1,4 +1,5 @@
 import PureTaskList from './PureTaskList';
+import { withKnobs, array } from '@storybook/addon-knobs';
 import { taskData, actionsData } from './Task.stories';
 
 const paddedList = () => {
@@ -9,7 +10,7 @@ const paddedList = () => {
 export default {
   title: 'TaskList',
   excludeStories: /.*Data$/,
-  decorators: [paddedList],
+  decorators: [paddedList, withKnobs],
 };
 
 export const defaultTasksData = [
@@ -32,7 +33,7 @@ export const Default = () => ({
   template: `<pure-task-list :tasks="tasks" @archiveTask="onArchiveTask" @pinTask="onPinTask"/>`,
   props: {
     tasks: {
-      default: defaultTasksData
+	  default: array('task', { ...defaultTasksData })
     }
   },
   methods: actionsData
